@@ -1,0 +1,102 @@
+{
+  "_args": [
+    [
+      {
+        "name": "cloudsight",
+        "raw": "cloudsight",
+        "rawSpec": "",
+        "scope": null,
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/sarahmeyer/workspace/4Q/SnapFit/snapfit"
+    ]
+  ],
+  "_from": "cloudsight@latest",
+  "_id": "cloudsight@1.1.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/cloudsight",
+  "_nodeVersion": "6.2.0",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/cloudsight-1.1.1.tgz_1464316044275_0.34638687362894416"
+  },
+  "_npmUser": {
+    "email": "fr@nkl.in",
+    "name": "franklin"
+  },
+  "_npmVersion": "3.8.9",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "cloudsight",
+    "raw": "cloudsight",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/cloudsight/-/cloudsight-1.1.1.tgz",
+  "_shasum": "0e4352f2bba8ed4ba6baf2bf4f216cca9fe519d7",
+  "_shrinkwrap": null,
+  "_spec": "cloudsight",
+  "_where": "/Users/sarahmeyer/workspace/4Q/SnapFit/snapfit",
+  "author": {
+    "email": "fr@nkl.in",
+    "name": "Franklin van de Meent",
+    "url": "https://frankl.in"
+  },
+  "bugs": {
+    "url": "https://github.com/fvdm/nodejs-cloudsight/issues"
+  },
+  "dependencies": {
+    "httpreq": "^0.4.22"
+  },
+  "description": "CloudSight image recognition API (unofficial)",
+  "devDependencies": {
+    "dotest": "^1.12.0",
+    "eslint": "^2.10.2"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "0e4352f2bba8ed4ba6baf2bf4f216cca9fe519d7",
+    "tarball": "https://registry.npmjs.org/cloudsight/-/cloudsight-1.1.1.tgz"
+  },
+  "engines": {
+    "node": ">=0.12"
+  },
+  "gitHead": "0880d3969ed0207c328161524897004e773043f0",
+  "homepage": "https://github.com/fvdm/nodejs-cloudsight#readme",
+  "keywords": [
+    "cloudsight",
+    "image recognition",
+    "image",
+    "vision",
+    "ocr",
+    "api",
+    "detection",
+    "recognition"
+  ],
+  "license": "Unlicense",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "email": "fr@nkl.in",
+      "name": "franklin"
+    }
+  ],
+  "name": "cloudsight",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fvdm/nodejs-cloudsight.git"
+  },
+  "scripts": {
+    "test": "st=0; eslint . || st=1; node test.js || st=1; exit $st"
+  },
+  "version": "1.1.1"
+}

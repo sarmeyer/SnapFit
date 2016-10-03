@@ -36,3 +36,4 @@ app.factory('DataServiceHTTP', function($http, nutritionix) {
         }
     };
 });
+

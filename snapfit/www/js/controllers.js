@@ -1,5 +1,5 @@
 app.controller('main', function($scope, $cordovaCamera, DataService, DataServiceHTTP) {
-    var config = require('../config.json');
+    // var config = require('../config.json');
 
     $scope.takeImage = function() {
         var options = {
@@ -16,21 +16,11 @@ app.controller('main', function($scope, $cordovaCamera, DataService, DataService
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
             $scope.srcImage = "data:image/jpeg;base64," + imageData;
-            // $scope.imgURL = "data:image/jpeg;base64," + imageData;
         }, function(err) {
             // error
         });
     };
-    var cloudsight = require ('cloudsight') ({
-        apikey: 'config.cloud_apikey'
-      });
 
-      var image = {
-        image: '$scope.srcImage',
-        locale: 'en-US'
-      };
-
-    cloudsight.request (image, true, console.log);
     $scope.imgURL = image;
 
     $scope.data = { searchKey: '' };

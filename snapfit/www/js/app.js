@@ -2,7 +2,7 @@ var app = angular.module('starter', ['ionic', 'ngCordova', 'ngResource'])
     .value('nutritionix', {
         'appId': '67ca9680',
         'appKey': 'f2c1ffde813cfe43dad5a60f4f6faa15'
-    })
+    });
 
 app.controller('main', function($scope, $cordovaCamera, DataService, DataServiceHTTP) {
     $scope.takeImage = function() {
@@ -26,12 +26,11 @@ app.controller('main', function($scope, $cordovaCamera, DataService, DataService
         }, function(err) {
             // error
         });
-    }
+    };
 
     $scope.data = { searchKey: '' };
 
     $scope.getItemHeight = function(item, index) {
-        //Make evenly indexed items be 10px taller, for the sake of example
         return 80;
     };
 
@@ -50,7 +49,6 @@ app.controller('main', function($scope, $cordovaCamera, DataService, DataService
             });
 
         } else {
-            // use the $http based service
             var promise = DataServiceHTTP.getAll($scope.data.searchKey);
             promise.then(function(_response) {
                 console.debug(" The data " + JSON.stringify(_response.data));
@@ -58,7 +56,7 @@ app.controller('main', function($scope, $cordovaCamera, DataService, DataService
             });
         }
     };
-})
+});
 
 app.factory('DataService', function($resource, nutritionix) {
     var aSearchObject = $resource('https://api.nutritionix.com/v1_1/search/:term', { term: '@term' }, {
@@ -76,19 +74,17 @@ app.factory('DataService', function($resource, nutritionix) {
     return {
         getAll: function(_params) {
             var defaultFields = 'brand_id,item_name,item_id,brand_name,nf_calories,nf_total_fat';
-
             if (!_params.fields) {
                 _params.fields = defaultFields;
             }
             return aSearchObject.getAll(_params);
         }
-    }
-})
+    };
+});
 
 app.factory('DataServiceHTTP', function($http, nutritionix) {
     return {
         getAll: function(_key) {
-
             return $http.get('https://api.nutritionix.com/v1_1/search/' + _key, {
                 'params': {
                     results: '0:50',
@@ -98,8 +94,8 @@ app.factory('DataServiceHTTP', function($http, nutritionix) {
                 }
             });
         }
-    }
-})
+    };
+});
 app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
         if (window.cordova && window.cordova.plugins.Keyboard) {

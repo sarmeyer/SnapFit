@@ -1,50 +1,38 @@
-angular.module('starter.services', [])
-
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
-
-  // Some fake testing data
-  var chats = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'img/max.png'
-  }, {
-    id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'img/adam.jpg'
-  }, {
-    id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'img/perry.png'
-  }, {
-    id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/mike.png'
-  }];
-
-  return {
-    all: function() {
-      return chats;
-    },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
-    },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
+app.factory('DataService', function($resource, nutritionix) {
+    var aSearchObject = $resource('https://api.nutritionix.com/v1_1/search/:term', { term: '@term' }, {
+        getAll: {
+            method: 'get',
+            //isArray : true,
+            params: {
+                results: ':results',
+                appId: nutritionix.appId,
+                appKey: nutritionix.appKey,
+                fields: ':fields',
+            }
         }
-      }
-      return null;
-    }
-  };
+    });
+    return {
+        getAll: function(_params) {
+            var defaultFields = 'brand_id,item_name,item_id,brand_name,nf_calories,nf_total_fat';
+            if (!_params.fields) {
+                _params.fields = defaultFields;
+            }
+            return aSearchObject.getAll(_params);
+        }
+    };
+});
+
+app.factory('DataServiceHTTP', function($http, nutritionix) {
+    return {
+        getAll: function(_key) {
+            return $http.get('https://api.nutritionix.com/v1_1/search/' + _key, {
+                'params': {
+                    results: '0:50',
+                    appId: nutritionix.appId,
+                    appKey: nutritionix.appKey,
+                    fields: 'brand_id,item_name,item_id,brand_name,nf_calories,nf_total_fat'
+                }
+            });
+        }
+    };
 });

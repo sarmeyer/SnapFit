@@ -20,16 +20,18 @@ app.controller('main', function($base64, $scope, $http, $cordovaCamera, imageSer
         });
     };
 
+            // console.log('**********');
+            // console.log(srcImage.getAttribute('ng-src'));
     $scope.data = { searchKey: '' };
 
     $scope.getAccess = function(){
         var tokenData = imageService.getToken();
         tokenData.then(function(response){
             var token = response.data.access_token;
-            var imgData = imageService.getTags({
-                'token': token,
-                'imageUrl': $scope.srcImage;
-            });
+        var imgData = imageService.getTags({
+            'token': token,
+            'imageUrl': srcImage
+        });
             imgData.then(function(data){
                 console.log(data);
             })

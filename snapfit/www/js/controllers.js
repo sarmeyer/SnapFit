@@ -20,9 +20,6 @@ app.controller('main', function($scope, $cordovaCamera, DataService, DataService
             // error
         });
     };
-
-    $scope.imgURL = image;
-
     $scope.data = { searchKey: '' };
 
     $scope.getItemHeight = function(item, index) {

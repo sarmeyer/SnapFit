@@ -36,4 +36,18 @@ app.factory('DataServiceHTTP', function($http, nutritionix) {
         }
     };
 });
-app.factory('')
+// app.factory('imageService', function($http){
+//     apiKey = 'acc_85fa1ef3600a1ce',
+//     apiSecret = '495bcac8bc9c17b37bc0778af2ecc7cd',
+//     imageUrl = $scope.srcImage;
+
+//     return {
+//         tagImage: function(imageUrl){
+//             return $http.get('https://api.imagga.com/v1/tagging?url='+encodeURIComponent(imageUrl), function (error, response, body) {
+//                 console.log('Status:', response.statusCode);
+//                 console.log('Headers:', JSON.stringify(response.headers));
+//                 console.log('Response:', body);
+//                 }).auth(apiKey, apiSecret, true);
+//         }
+//     }
+// })

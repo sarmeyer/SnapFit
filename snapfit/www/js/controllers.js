@@ -1,5 +1,4 @@
-app.controller('main', function($scope, $cordovaCamera, DataService, DataServiceHTTP) {
-    // var config = require('../config.json');
+app.controller('main', function($scope, $cordovaCamera, DataService, DataServiceHTTP, $http) {
 
     $scope.takeImage = function() {
         var options = {
@@ -22,14 +21,17 @@ app.controller('main', function($scope, $cordovaCamera, DataService, DataService
     };
 
     $scope.data = { searchKey: '' };
-    $scope.srcImage = { imageUrl: ''};
-    $scope.getItemHeight = function(item, index) {
-        return 80;
-    };
+
+    // $scope.srcImage = { imageUrl: ''};
+    $scope.getTags = function(){
+        $http.get('https://api.imagga.com/v1/tagging?url='+encodeURIComponent($scope.srcImage), function (error, response, body) {
+            console.log('Status:', response.statusCode);
+            console.log('Headers:', JSON.stringify(response.headers));
+            console.log('Response:', body);
+            }).auth(apiKey, apiSecret, true);
+        }
 
     $scope.doSearch = function() {
-        console.debug("Searching for: " + $scope.data.searchKey);
-
         if (true) {
             var promise = DataService.getAll({
                 'term': $scope.data.searchKey,

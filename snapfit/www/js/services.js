@@ -36,18 +36,13 @@ app.factory('DataServiceHTTP', function($http, nutritionix) {
         }
     };
 });
-// app.factory('imageService', function($http){
-//     apiKey = 'acc_85fa1ef3600a1ce',
-//     apiSecret = '495bcac8bc9c17b37bc0778af2ecc7cd',
-//     imageUrl = $scope.srcImage;
-
-//     return {
-//         tagImage: function(imageUrl){
-//             return $http.get('https://api.imagga.com/v1/tagging?url='+encodeURIComponent(imageUrl), function (error, response, body) {
-//                 console.log('Status:', response.statusCode);
-//                 console.log('Headers:', JSON.stringify(response.headers));
-//                 console.log('Response:', body);
-//                 }).auth(apiKey, apiSecret, true);
-//         }
-//     }
-// })
+app.factory('imageService', function($http){
+    return {
+        getToken: function(){
+            return $http.post('https://api.clarifai.com/v1/token/?client_id=Fi1oy98C5k1GWRFjZHDBKb0OVPAefQh5anrvnVoB&client_secret=sH7N9LUeacLgmdUlMPKQWTH3zdhUC8NwKRL3bs-t&grant_type=client_credentials')
+        },
+        getTags: function(token){
+            return $http.get('https://api.clarifai.com/v1/tag/?model=food-items-v1.0&url=https://samples.clarifai.com/food.jpg')
+        }
+    }
+})

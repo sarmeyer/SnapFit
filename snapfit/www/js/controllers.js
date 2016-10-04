@@ -1,4 +1,4 @@
-app.controller('main', function($scope, $cordovaCamera, DataService, DataServiceHTTP, $http) {
+app.controller('main', function($base64, $scope, $http, $cordovaCamera, imageService, DataService, DataServiceHTTP) {
 
     $scope.takeImage = function() {
         var options = {
@@ -22,31 +22,33 @@ app.controller('main', function($scope, $cordovaCamera, DataService, DataService
 
     $scope.data = { searchKey: '' };
 
-    // $scope.srcImage = { imageUrl: ''};
-    $scope.getTags = function(){
-        $http.get('https://api.imagga.com/v1/tagging?url='+encodeURIComponent($scope.srcImage), function (error, response, body) {
-            console.log('Status:', response.statusCode);
-            console.log('Headers:', JSON.stringify(response.headers));
-            console.log('Response:', body);
-            }).auth(apiKey, apiSecret, true);
-        }
+    $scope.getAccess = function(){
+        var tokenData = imageService.getToken();
+        tokenData.then(function(response){
+            var token = response.data.access_token;
+            var imgData = imageService.getTags({
+                'token': token,
+                'imageUrl': $scope.srcImage;
+            });
+            imgData.then(function(data){
+                console.log(data);
+            })
+        })
+    }
 
     $scope.doSearch = function() {
         if (true) {
             var promise = DataService.getAll({
                 'term': $scope.data.searchKey,
-                'results': '0:50',
-                //'fields':'item_name'
+                'results': '0:50'
             }).$promise;
             promise.then(function(_response) {
-                console.debug(" The data " + JSON.stringify(_response));
                 $scope.items = _response.hits;
             });
 
         } else {
             var promise = DataServiceHTTP.getAll($scope.data.searchKey);
             promise.then(function(_response) {
-                console.debug(" The data " + JSON.stringify(_response.data));
                 $scope.items = _response.data.hits;
             });
         }

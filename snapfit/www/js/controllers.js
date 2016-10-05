@@ -30,7 +30,8 @@ app.controller('main', function($scope, $cordovaCamera, $http, imageService, Dat
         });
             imgData.then(function(data){
                 $scope.ingredients = data.data.results[0].result.tag.classes;
-                console.log(data.data.results[0].result.tag.classes);
+                $scope.data.searchKey = $scope.ingredients[0];
+                $scope.doSearch();
             });
         });
     };
@@ -38,20 +39,14 @@ app.controller('main', function($scope, $cordovaCamera, $http, imageService, Dat
     $scope.data = { searchKey: '' };
 
     $scope.doSearch = function() {
-        if (true) {
-            var promise = DataService.getAll({
-                'term': $scope.data.searchKey,
-                'results': '0:50'
-            }).$promise;
-            promise.then(function(_response) {
-                $scope.items = _response.hits;
-            });
-
-        } else {
-            var promise = DataServiceHTTP.getAll($scope.data.searchKey);
-            promise.then(function(_response) {
-                $scope.items = _response.data.hits;
-            });
+        if ( true ) {
+        var promise = DataService.getAll( {
+            'term' : $scope.data.searchKey,
+            'results':'0:50',
+        }).$promise;
+        promise.then(function(_response) {
+            $scope.items = _response.hits;
+        });
         }
     };
 });

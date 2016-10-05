@@ -1,4 +1,4 @@
-app.controller('main', function($base64, $scope, $http, $cordovaCamera, imageService, DataService, DataServiceHTTP) {
+app.controller('main', function($scope, $cordovaCamera, $http, imageService, DataService, DataServiceHTTP) {
 
     $scope.takeImage = function() {
         var options = {
@@ -19,8 +19,6 @@ app.controller('main', function($base64, $scope, $http, $cordovaCamera, imageSer
             // error
         });
     };
-    
-    $scope.data = { searchKey: '' };
 
     $scope.getAccess = function(){
         var tokenData = imageService.getToken();
@@ -31,10 +29,13 @@ app.controller('main', function($base64, $scope, $http, $cordovaCamera, imageSer
             'imageUrl': srcImage.getAttribute('src')
         });
             imgData.then(function(data){
-                console.log(data);
-            })
-        })
-    }
+                $scope.ingredients = data.data.results[0].result.tag.classes;
+                console.log(data.data.results[0].result.tag.classes);
+            });
+        });
+    };
+
+    $scope.data = { searchKey: '' };
 
     $scope.doSearch = function() {
         if (true) {

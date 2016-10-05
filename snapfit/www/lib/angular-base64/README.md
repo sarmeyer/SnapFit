@@ -24,10 +24,10 @@ bower install angular-base64
 angular
     .module('myApp', ['base64'])
     .controller('myController', [
-    
-        '$base64', '$scope', 
+
+        '$base64', '$scope',
         function($base64, $scope) {
-        
+
             $scope.encoded = $base64.encode('a string');
             $scope.decoded = $base64.decode('YSBzdHJpbmc=');
     }]);
@@ -41,10 +41,10 @@ You can encode unicode strings using base64 as described [here](https://develope
 angular
     .module('myApp', ['base64'])
     .controller('myUnicodeController', [
-    
-        '$base64', '$scope', 
+
+        '$base64', '$scope',
         function($base64, $scope) {
-        
+
             $scope.encoded = $base64.encode(unescape(encodeURIComponent('✓ a string')));
             $scope.decoded = decodeURIComponent(escape($base64.decode('4pyTIGEgc3RyaW5n')));
     }]);

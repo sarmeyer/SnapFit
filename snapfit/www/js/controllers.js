@@ -1,23 +1,33 @@
 app.controller('main', function($scope, $cordovaCamera, $http, imageService, DataService, DataServiceHTTP) {
 
     $scope.takeImage = function() {
-        var options = {
-            quality: 80,
+         var options = {
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.CAMERA,
-            allowEdit: true,
-            encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 250,
-            targetHeight: 250,
-            popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: false
-        };
+            };
 
-        $cordovaCamera.getPicture(options).then(function(imageData) {
+            $cordovaCamera.getPicture(options).then(function(imageData) {
             $scope.srcImage = "data:image/jpeg;base64," + imageData;
-        }, function(err) {
+            }, function(err) {
             // error
-        });
+            });
+        // var options = {
+        //     quality: 80,
+        //     destinationType: Camera.DestinationType.DATA_URL,
+        //     sourceType: Camera.PictureSourceType.CAMERA,
+        //     allowEdit: true,
+        //     encodingType: Camera.EncodingType.JPEG,
+        //     targetWidth: 250,
+        //     targetHeight: 250,
+        //     popoverOptions: CameraPopoverOptions,
+        //     saveToPhotoAlbum: false
+        // };
+
+        // $cordovaCamera.getPicture(options).then(function(imageData) {
+        //     $scope.srcImage = "data:image/jpeg;base64," + imageData;
+        // }, function(err) {
+        //     // error
+        // });
     };
 
     $scope.getAccess = function(){

@@ -5,7 +5,7 @@ app.factory('imageService', function($http){
         },
         getTags: function(accessData){
             console.log(accessData.imageUrl);
-            return $http.get('https://api.clarifai.com/v1/tag/?model=food-items-v1.0&url='+accessData.imageUrl, {
+            return $http.post('https://api.clarifai.com/v1/tag/?model=food-items-v1.0&encoded_data='+accessData.imageUrl, {
                     headers: {'Authorization': 'Bearer ' + accessData.token}
                 });
         }

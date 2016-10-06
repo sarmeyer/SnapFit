@@ -2,14 +2,16 @@
   var router = express.Router();
   var aws = require('aws-sdk');
   var config = require('../config.js')
+  var crypto = require('crypto');
 
 router.get('/', function(req,res,next){
-  res.json({imageURL: 'imageURL'})
-})
+res.send('you are at the home page');
+});
 function sign(req, res, next) {
+
     var fileName = req.body.fileName,
         expiration = new Date(new Date().getTime() + 1000 * 60 * 5).toISOString();
-
+    var secret = 'sijdfnkf3';
     var policy =
     { "expiration": expiration,
         "conditions": [
@@ -26,4 +28,4 @@ function sign(req, res, next) {
 }
  router.post('/signing', sign);
 
-  module.exports = router
+  module.exports = router;

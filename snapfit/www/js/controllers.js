@@ -11,7 +11,7 @@ app.controller('main', function($scope, $cordovaCamera, $http, $cordovaFileTrans
         });
     };
     function uploadToS3(imageURI) {
-        var signingURI = "http://localhost:3000/signing";
+        var signingURI = "http://localhost:3030/signing";
         var fileName = 'snapfitphoto' + new Date().getTime() + ".jpg";
             function upload(imageURI, fileName) {
                 $http.post(signingURI, {
@@ -33,22 +33,21 @@ app.controller('main', function($scope, $cordovaCamera, $http, $cordovaFileTrans
                         "signature": data.signature,
                         "Content-Type": "image/jpeg"
                     };
-                    $cordovaFileTransfer.upload(imageURI, "https://" + data.bucket + ".s3.amazonaws.com/",
-                        function (e) {
-                            deferred.resolve(e);
-                        },
-                        function (e) {
-                            alert("Upload failed");
-                            deferred.reject(e);
-                        }, options);
-                }).fail(function (error) {
-                        console.log(JSON.stringify(error));
+                $cordovaFileTransfer.upload("https://" + data.bucket + ".s3.amazonaws.com/", imageURI, Uoptions)
+                        .then(function(result) {
+                            // Success!
+                            console.log('upload to s3 succeed ', result);
+                        }, function(err) {
+                            // Error
+                            $ionicLoading.show({template : 'Upload Failed', duration: 3000});
+                            console.log('upload to s3 fail ', err);
+                        }, function(progress) {
                     });
-                        return deferred.promise();
-                     }
-                        return {
-                             upload: upload
-                    };
+                })
+                    .error(function(data, status, headers, config) {
+                        console.log(' didnt Got signed doc: ' + JSON.stringify(data));
+                    });
+                }
             }
 
     $scope.getAccess = function(){

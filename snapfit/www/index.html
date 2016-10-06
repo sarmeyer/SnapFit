@@ -42,10 +42,8 @@
             <h3>Food nutrients at your fingertips</h3>
                 <img ng-src="{{srcImage || 'https://thegreedyveganbeast.files.wordpress.com/2014/08/img_2601.jpg'}}" id="srcImage" width="250 " height="250" style="display: block; margin: 0 auto;"><br>
                 <button class="button button-full button-positive" ng-click="takeImage()">Take Image</button><br>
-            <form action="/" method="post" enctype="multipart/form-data">
-                <input type="text" value="{{srcImage}}">
+                <p>{{srcImage}}</p>
             <button class="button button-full button-energized" ng-click="getAccess()" role="button">Get Food Facts</button>
-            </form>
             <section class="list">
                 <div class="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
                         {{ingredient}}

@@ -2,15 +2,14 @@ app.controller('main', function($scope, $cordovaCamera, $http, imageService, Dat
 
     $scope.takeImage = function() {
          var options = {
-            destinationType: Camera.DestinationType.DATA_URL,
+            destinationType: Camera.DestinationType.FILE_URI,
             sourceType: Camera.PictureSourceType.CAMERA
             };
-
+// file:///var/mobile/Containers/Data/Applications/9267D6CE-985C-43D1-97CF-7B1CD519DD86/tmp/cdv_photo_002.jpg
             $cordovaCamera.getPicture(options).then(function(imageData) {
-            $scope.srcImage = "data:image/jpeg;base64," + imageData;
-            }, function(err) {
-            // error
-            });
+                $http.get('http://localhost:3000/image_processor', imageData)
+            $scope.srcImage = imageData;
+        };
     };
 
     $scope.getAccess = function(){

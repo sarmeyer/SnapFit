@@ -3,12 +3,8 @@
   var aws = require('aws-sdk');
 
   router.get('/image_processor', function(req, res) {
-    res.render('index');
+    res.json({imageURL: req.imageData});
   });
-
-  var AWS_ACCESS_KEY = 'AKIAIJQGTP6TJFTZFHDQ';
-  var AWS_SECRET_KEY = '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';
-  var S3_BUCKET = 'uploadimages_snapfit';
 
   router.get('/sign', function(req, res) {
     aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});

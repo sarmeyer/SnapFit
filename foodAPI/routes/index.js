@@ -3,6 +3,9 @@
   var aws = require('aws-sdk');
   var config = require('../config.js')
 
+router.get('/', function(req,res,next){
+  res.json({imageURL: 'imageURL'})
+})
 function sign(req, res, next) {
     var fileName = req.body.fileName,
         expiration = new Date(new Date().getTime() + 1000 * 60 * 5).toISOString();
@@ -21,6 +24,6 @@ function sign(req, res, next) {
     signature = crypto.createHmac('sha1', secret).update(policyBase64).digest('base64');
     res.json({bucket: config.S3_BUCKET, awsKey: config.ACCESS_KEY, policy: policyBase64, signature: signature});
 }
- app.post('/signing', sign);
+ router.post('/signing', sign);
 
   module.exports = router

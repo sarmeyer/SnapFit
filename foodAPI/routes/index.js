@@ -1,31 +1,26 @@
   var express = require('express');
   var router = express.Router();
   var aws = require('aws-sdk');
+  var config = require('../config.js')
 
-  router.get('/image_processor', function(req, res) {
-    res.json({imageURL: req.imageData});
-  });
+function sign(req, res, next) {
+    var fileName = req.body.fileName,
+        expiration = new Date(new Date().getTime() + 1000 * 60 * 5).toISOString();
 
-  router.get('/sign', function(req, res) {
-    aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
+    var policy =
+    { "expiration": expiration,
+        "conditions": [
+            {"bucket": config.S3_BUCKET},
+            {"key": fileName},
+            {"acl": 'public-read'},
+            ["starts-with", "$Content-Type", ""],
+            ["content-length-range", 0, 524288000]
+        ]};
 
-    var s3 = new aws.S3();
-    var options = {
-      Bucket: S3_BUCKET,
-      Key: req.query.file_name,
-      Expires: 60,
-      ContentType: req.query.file_type,
-      ACL: 'public-read'
-    }
-
-    s3.getSignedUrl('putObject', options, function(err, data){
-      if(err) return res.send('Error with S3' + err)
-
-      res.json({
-        signed_request: data,
-        url: 'https://s3.amazonaws.com/' + S3_BUCKET + '/' + req.query.file_name
-      });
-    });
-  });
+    policyBase64 = new Buffer(JSON.stringify(policy), 'utf8').toString('base64');
+    signature = crypto.createHmac('sha1', secret).update(policyBase64).digest('base64');
+    res.json({bucket: config.S3_BUCKET, awsKey: config.ACCESS_KEY, policy: policyBase64, signature: signature});
+}
+ app.post('/signing', sign);
 
   module.exports = router

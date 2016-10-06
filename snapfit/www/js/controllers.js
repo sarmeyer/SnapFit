@@ -1,16 +1,54 @@
-app.controller('main', function($scope, $cordovaCamera, $http, imageService, DataService, DataServiceHTTP) {
+app.controller('main', function($scope, $cordovaCamera, $http, $cordovaFileTransfer, imageService, DataService, DataServiceHTTP) {
 
     $scope.takeImage = function() {
          var options = {
             destinationType: Camera.DestinationType.FILE_URI,
             sourceType: Camera.PictureSourceType.CAMERA
             };
-// file:///var/mobile/Containers/Data/Applications/9267D6CE-985C-43D1-97CF-7B1CD519DD86/tmp/cdv_photo_002.jpg
-            $cordovaCamera.getPicture(options).then(function(imageData) {
-                $http.get('http://localhost:3000/image_processor', imageData)
-            $scope.srcImage = imageData;
-        };
+            $cordovaCamera.getPicture(options).then(function(imageURI) {
+            $scope.srcImage = imageURI;
+        });
     };
+    $scope.uploadToS3 = function(imageURI) {
+        var signingURI = "http://localhost:3000/signing";
+        var fileName = 'snapfitphoto' + new Date().getTime() + ".jpg";
+            function upload(imageURI, fileName) {
+                $http.post(signingURI, {
+                    "fileName": fileName
+                }).success(function(data, status, headers, config) {
+                    var Uoptions = {};
+                    Uoptions.fileKey = "file";
+                    Uoptions.fileName = fileName;
+                    Uoptions.mimeType = "image/jpeg";
+                    Uoptions.chunkedMode = false;
+                    Uoptions.headers = {
+                        connection: "close"
+                    };
+                    Uoptions.params = {
+                        "key": fileName,
+                        "AWSAccessKeyId": data.awsKey,
+                        "acl": "private",
+                        "policy": data.policy,
+                        "signature": data.signature,
+                        "Content-Type": "image/jpeg"
+                    };
+                    $cordovaFileTransfer.upload(imageURI, "https://" + data.bucket + ".s3.amazonaws.com/",
+                        function (e) {
+                            deferred.resolve(e);
+                        },
+                        function (e) {
+                            alert("Upload failed");
+                            deferred.reject(e);
+                        }, options);
+                }).fail(function (error) {
+                        console.log(JSON.stringify(error));
+                    });
+                        return deferred.promise();
+                     }
+                        return {
+                             upload: upload
+                    };
+            };
 
     $scope.getAccess = function(){
         var tokenData = imageService.getToken();

@@ -7,13 +7,15 @@ app.controller('main', function($scope, $cordovaCamera, $http, $cordovaFileTrans
             };
             $cordovaCamera.getPicture(options).then(function(imageURI) {
             $scope.srcImage = imageURI;
-            uploadToS3(imageURI);
         });
+            // $scope.uploadToS3(image);
     };
-    function uploadToS3(imageURI) {
+    var image = 'https://pbs.twimg.com/profile_images/446566229210181632/2IeTff-V.jpeg';
+     $scope.uploadToS3 = function(image) {
+
         var signingURI = "http://localhost:3030/signing";
         var fileName = 'snapfitphoto' + new Date().getTime() + ".jpg";
-            function upload(imageURI, fileName) {
+         console.log('*****************');
                 $http.post(signingURI, {
                     "fileName": fileName
                 }).success(function(data, status, headers, config) {
@@ -33,7 +35,7 @@ app.controller('main', function($scope, $cordovaCamera, $http, $cordovaFileTrans
                         "signature": data.signature,
                         "Content-Type": "image/jpeg"
                     };
-                $cordovaFileTransfer.upload("https://" + data.bucket + ".s3.amazonaws.com/", imageURI, Uoptions)
+                $cordovaFileTransfer.upload("https://" + data.bucket + ".s3.amazonaws.com/", image, Uoptions)
                         .then(function(result) {
                             // Success!
                             console.log('upload to s3 succeed ', result);
@@ -45,10 +47,9 @@ app.controller('main', function($scope, $cordovaCamera, $http, $cordovaFileTrans
                     });
                 })
                     .error(function(data, status, headers, config) {
-                        console.log(' didnt Got signed doc: ' + JSON.stringify(data));
+                        console.log('didnt get signed doc: ' + JSON.stringify(data));
                     });
-                }
-            }
+            };
 
     $scope.getAccess = function(){
         var tokenData = imageService.getToken();

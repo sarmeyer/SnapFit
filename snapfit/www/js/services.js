@@ -1,17 +1,15 @@
-app.factory('imageService', function($http){
-    return {
-        getToken: function(){
-            return $http.post('https://api.clarifai.com/v1/token/?client_id=Fi1oy98C5k1GWRFjZHDBKb0OVPAefQh5anrvnVoB&client_secret=sH7N9LUeacLgmdUlMPKQWTH3zdhUC8NwKRL3bs-t&grant_type=client_credentials');
-        },
-        getTags: function(accessData){
-            // var data = 'file:///var/mobile/Containers/Data/Applications/9267D6CE-985C-43D1-97CF-7B1CD519DD86/tmp/cdv_photo_002.jpg';
-            // return $http.get('http://localhost:3000/signing', data);
-            // return $http.post('https://api.clarifai.com/v1/tag/?model=food-items-v1.0&encoded_data='+accessData.imageUrl, {
-            //         headers: {'Authorization': 'Bearer ' + accessData.token}
-            //     });
-        }
-    };
-});
+// app.factory('imageService', function($http){
+//     return {
+//         getToken: function(){
+//             return $http.post('https://api.clarifai.com/v1/token/?client_id=Fi1oy98C5k1GWRFjZHDBKb0OVPAefQh5anrvnVoB&client_secret=sH7N9LUeacLgmdUlMPKQWTH3zdhUC8NwKRL3bs-t&grant_type=client_credentials');
+//         },
+//         getTags: function(accessData){
+//             // return $http.post('https://api.clarifai.com/v1/tag/?model=food-items-v1.0&encoded_data='+accessData.imageUrl, {
+//             //         headers: {'Authorization': 'Bearer ' + accessData.token}
+//             //     });
+//         }
+//     };
+// });
 
 app.factory('DataService', function($resource, nutritionix) {
     var aSearchObject = $resource('https://api.nutritionix.com/v1_1/search/:term', { term: '@term' }, {

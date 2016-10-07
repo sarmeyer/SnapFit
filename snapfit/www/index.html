@@ -17,7 +17,6 @@
     </script>-->
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
@@ -33,7 +32,7 @@
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
-
+    <script src="js/directives.js"></script>
 
 </head><body ng-app="app" ng-controller="main" ng-cloak="">
     <ion-pane>
@@ -41,8 +40,10 @@
             <h1>SnapFit</h1>
             <h3>Food nutrients at your fingertips</h3>
                 <img ng-src="{{srcImage || 'https://thegreedyveganbeast.files.wordpress.com/2014/08/img_2601.jpg'}}" id="srcImage" width="250 " height="250" style="display: block; margin: 0 auto;"><br>
-                <button class="button button-full button-positive" ng-click="uploadToS3()">Take Image</button><br>
-                <p>{{srcImage}}</p>
+                <form ng-model='file'>
+                    <input ng-model='file.upload' onchange="angular.element(this).scope().setFile(this)" type="file"/>
+                    <button class="button button-full button-positive" ng-click="uploadFile()">Submit Image</button><br>
+                </form>
             <button class="button button-full button-energized" ng-click="getAccess()" role="button">Get Food Facts</button>
             <section class="list">
                 <div class="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">

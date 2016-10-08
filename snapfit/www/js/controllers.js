@@ -1,6 +1,6 @@
 app.controller('main', function($scope, $http, DataService, DataServiceHTTP) {
 
-
+$scope.upload = (function(){
     $scope.uploadFiles = function(file, errFiles) {
         $scope.f = file;
         $scope.errFile = errFiles && errFiles[0];
@@ -23,6 +23,7 @@ app.controller('main', function($scope, $http, DataService, DataServiceHTTP) {
             });
         }
     }
+}());
 
 
     $scope.getAccess = function(){

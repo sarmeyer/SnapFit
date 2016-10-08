@@ -13,19 +13,12 @@ res.send('you are at the home page');
 });
 
 function S3upload(req, res, next){
-    var s3bucket = new AWS.S3({params: {Bucket: 'snapfitupload'}});
-    var s3Params = {
-            Bucket: s3bucket,
-            Key: req.body.fileName,
-            Expires: 60,
-            ContentType: fileType,
-            ACL: 'public-read'
-        };
+    var s3bucket = new AWS.S3({params: {Bucket: 'uploadsnapfit'}});
     s3bucket.createBucket(function() {
         console.log('*********REQ******');
         console.log(req.body);
-        var params = {Key: req.body.fileName, Body: 'snapFit Photo'};
-        s3.getSignedUrl('getObject', s3Params, function (err, url) {
+        var params = {Key: req.body.fileName, ContentType: 'req.body.type'};
+        s3.getSignedUrl('getObject', params, function (err, url) {
             console.log("The URL is", url);
             });
         s3bucket.upload(params, function(err, data) {

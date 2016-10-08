@@ -11,6 +11,7 @@
 //     };
 // });
 
+
 app.factory('DataService', function($resource, nutritionix) {
     var aSearchObject = $resource('https://api.nutritionix.com/v1_1/search/:term', { term: '@term' }, {
         getAll: {

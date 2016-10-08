@@ -24,7 +24,6 @@
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.5.8/angular-resource.min.js"></script>
-
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-cordova/0.1.27-alpha/ng-cordova.min.js"></script>
@@ -40,9 +39,9 @@
             <h1>SnapFit</h1>
             <h3>Food nutrients at your fingertips</h3>
                 <img ng-src="{{srcImage || 'https://thegreedyveganbeast.files.wordpress.com/2014/08/img_2601.jpg'}}" id="srcImage" width="250 " height="250" style="display: block; margin: 0 auto;"><br>
-                <form ng-model='file'>
-                    <input ng-model='file.upload' onchange="angular.element(this).scope().setFile(this)" type="file"/>
-                    <button class="button button-full button-positive" ng-click="uploadFile()">Submit Image</button><br>
+                <form>
+                    <input name="file" type="file" file />
+                    <button class="button button-full button-positive" ng-click="upload()">Submit Image</button><br>
                 </form>
             <button class="button button-full button-energized" ng-click="getAccess()" role="button">Get Food Facts</button>
             <section class="list">

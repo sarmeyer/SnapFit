@@ -1,7 +1,5 @@
 app.controller('imageCtrl', function ($scope, $http, Upload, $timeout) {
-    // ['$scope', '$http', 'Upload', '$timeout',
     $scope.uploadPic = function(file) {
-        console.log('********ANGULAR UPLOAD PIC FUNCTION*****');
 
         var filename = file.name;
         var type = file.type;
@@ -14,17 +12,21 @@ app.controller('imageCtrl', function ($scope, $http, Upload, $timeout) {
         $http.post('http://localhost:3030/signing', query)
             .success(function(result) {
                 console.log('*********SIGNING RESULT********');
-                console.log(result);
+                console.log(result.fields);
+                var data = result.fields;
                 Upload.upload({
-                    url: 'https://snapfitupload.s3.amazonaws.com/', //S3 upload url including bucket name
-                    transformRequest: function(data, headersGetter) {
-                        var headers = headersGetter();
-                        delete headers.Authorization;
-                        return data;
-                    },
-                    fields: result.fields, //credentials
+                    url:'https://uploadimages-snapfit.s3.amazonaws.com/',
                     method: 'POST',
-                    file: file
+                    data: {
+                        key: data.key,
+                        acl: 'private',
+                        Policy: data.policy,
+                        'X-Amz-Credential' : result.credentials,
+                        'X-Amz-Algorithm': 'AWS4-HMAC-SHA256',
+                        'X-Amz-Signature': data.signature,
+                        "Content-Type": data['Content-Type'],
+                        file: file
+                    }
                 }).progress(function(evt) {
                     console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
                 }).success(function(data, status, headers, config) {
@@ -35,8 +37,8 @@ app.controller('imageCtrl', function ($scope, $http, Upload, $timeout) {
                 });
             })
             .error(function(data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
+                console.log('There was an error');
+                console.log(data);
         });
     };
 });

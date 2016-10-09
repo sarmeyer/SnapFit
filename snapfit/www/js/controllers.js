@@ -33,13 +33,12 @@ app.controller('imageCtrl', function ($scope, imageService, DataService) {
     };
 });
 
-
-    // $scope.takeImage = function() {
-    //      var options = {
-    //         destinationType: Camera.DestinationType.FILE_URI,
-    //         sourceType: Camera.PictureSourceType.CAMERA
-    //         };
-    //         $cordovaCamera.getPicture(options).then(function(imageURI) {
-    //         $scope.srcImage = imageURI;
-    //     });
-    // };
+// $scope.takeImage = function() {
+//      var options = {
+//         destinationType: Camera.DestinationType.FILE_URI,
+//         sourceType: Camera.PictureSourceType.CAMERA
+//         };
+//         $cordovaCamera.getPicture(options).then(function(imageURI) {
+//         $scope.srcImage = imageURI;
+//     });
+// };

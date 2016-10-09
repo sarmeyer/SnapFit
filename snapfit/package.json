@@ -3,6 +3,7 @@
   "version": "1.1.1",
   "description": "snapfit: An Ionic project",
   "dependencies": {
+    "angular-utf8-base64": "0.0.5",
     "aws-sdk": "^2.6.6",
     "gulp": "^3.5.6",
     "gulp-concat": "^2.2.0",

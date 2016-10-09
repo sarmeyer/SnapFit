@@ -15,6 +15,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,15 +25,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-var allowCrossDomain = function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', "*");
-    res.setHeader('Access-Control-Allow-Methods', "GET, PUT, POST");
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With, Accept");
-    next();
-};
+// var allowCrossDomain = function(req, res, next) {
+//     res.setHeader("Access-Control-Allow-Origin", "*");
+//     res.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST");
+//     res.setHeader("Access-Control-Allow-Credentials", true);
+//     res.setHeader("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With, Accept");
+//     next();
+// };
 
-app.use(allowCrossDomain);
+// app.use(allowCrossDomain);
 app.use(cors());
 
 app.use(function(req, res, next) {

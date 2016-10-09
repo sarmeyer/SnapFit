@@ -17,35 +17,35 @@
     </script>-->
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="/imgur/build/imgur.min.css" rel="stylesheet" media="screen">
+
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
-
     <!-- ionic/angularjs js -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.5.8/angular-resource.min.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-cordova/0.1.27-alpha/ng-cordova.min.js"></script>
+
     <script src='https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.12/ng-file-upload.js'></script>
 
+    <script src="/imgur/build/imgur.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
 
-</head><body ng-app="fileUpload" ng-controller="imageCtrl" ng-cloak="">
+</head>
+<body ng-app="fileUpload" ng-controller="imageCtrl" ng-cloak="">
     <ion-pane>
         <ion-content padding="true">
             <h1>SnapFit</h1>
             <h3>Food nutrients at your fingertips</h3>
-                <form name="form">
-                    <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-                        ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
-                        ngf-resize="{width: 100, height: 100}">Choose Image</div>
-                    <button class="button button-full button-positive" ng-click="uploadPic(file)">Submit Image</button><br>
-                </form>
-                <img ngf-thumbnail="file || 'https://thegreedyveganbeast.files.wordpress.com/2014/08/img_2601.jpg'" id="srcImage" width="250 " height="250" style="display: block; margin: 0 auto;"><br>
-            <button class="button button-full button-energized" ng-click="getAccess()" role="button">Get Food Facts</button>
+            <div class="dropzone"></div>
+            <img id='url'></img>
+            <button class="button button-full button-calm" ng-click="getAccess()">Get Food Facts</button>
             <section class="list">
                 <div class="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
                         {{ingredient}}
@@ -61,5 +61,16 @@
                 </div>
         </ion-content>
     </ion-pane>
+    <script>
+        var callback = function (res) {
+            if (res.success) {
+                document.getElementById('url').src = res.data.link;
+            }
+        };
+        new Imgur({
+            clientid: '49cb7cc14a97f30',
+            callback: callback
+        });
+    </script>
 </body>
 </html>

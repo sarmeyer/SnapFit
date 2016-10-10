@@ -44,9 +44,9 @@ app.controller('imageCtrl', function ($scope, imageService, DataService, $cordov
 	};
     	$cordovaCamera.getPicture(options).then(function(imageData) {
             onImageSuccess(imageData);
-
 		function onImageSuccess(fileURI) {
 			createFileEntry(fileURI);
+            $scope.imageData = fileURI;
 		}
         function createFileEntry(fileURI) {
 			window.resolveLocalFileSystemURL(fileURI, copyFile, fail);
@@ -94,4 +94,44 @@ app.controller('imageCtrl', function ($scope, imageService, DataService, $cordov
         var trueOrigin = cordova.file.dataDirectory + name;
         return trueOrigin;
     };
+
+    $scope.formData = {};
 });
+
+
+<form class="ng-pristine ng-valid">
+                    <!-- ngRepeat: ingredient in ingredients | limitTo: 8 --><div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
+                        <label class="checkbox-inline ng-binding">
+                            <input type="checkbox" name="sweet" ng-model="formData.ingredient" ng-value="sweet" class="ng-pristine ng-untouched ng-valid ng-empty">sweet
+                        </label>
+                    </div><!-- end ngRepeat: ingredient in ingredients | limitTo: 8 --><div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
+                        <label class="checkbox-inline ng-binding">
+                            <input type="checkbox" name="syrup" ng-model="formData.ingredient" ng-value="syrup" class="ng-pristine ng-untouched ng-valid ng-empty">syrup
+                        </label>
+                    </div><!-- end ngRepeat: ingredient in ingredients | limitTo: 8 --><div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
+                        <label class="checkbox-inline ng-binding">
+                            <input type="checkbox" name="pastry" ng-model="formData.ingredient" ng-value="pastry" class="ng-pristine ng-untouched ng-valid ng-empty">pastry
+                        </label>
+                    </div><!-- end ngRepeat: ingredient in ingredients | limitTo: 8 --><div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
+                        <label class="checkbox-inline ng-binding">
+                            <input type="checkbox" name="pancake" ng-model="formData.ingredient" ng-value="pancake" class="ng-pristine ng-untouched ng-valid ng-empty">pancake
+                        </label>
+                    </div><!-- end ngRepeat: ingredient in ingredients | limitTo: 8 --><div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
+                        <label class="checkbox-inline ng-binding">
+                            <input type="checkbox" name="cake" ng-model="formData.ingredient" ng-value="cake" class="ng-pristine ng-untouched ng-valid ng-empty">cake
+                        </label>
+                    </div><!-- end ngRepeat: ingredient in ingredients | limitTo: 8 --><div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
+                        <label class="checkbox-inline ng-binding">
+                            <input type="checkbox" name="cream" ng-model="formData.ingredient" ng-value="cream" class="ng-pristine ng-untouched ng-valid ng-empty">cream
+                        </label>
+                    </div><!-- end ngRepeat: ingredient in ingredients | limitTo: 8 --><div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
+                        <label class="checkbox-inline ng-binding">
+                            <input type="checkbox" name="honey" ng-model="formData.ingredient" ng-value="honey" class="ng-pristine ng-untouched ng-valid ng-empty">honey
+                        </label>
+                    </div><!-- end ngRepeat: ingredient in ingredients | limitTo: 8 --><div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
+                        <label class="checkbox-inline ng-binding">
+                            <input type="checkbox" name="chocolate" ng-model="formData.ingredient" ng-value="chocolate" class="ng-pristine ng-untouched ng-valid ng-empty">chocolate
+                        </label>
+                    </div><!-- end ngRepeat: ingredient in ingredients | limitTo: 8 -->
+                    <button ng-show="showme" type="submit" class="nutritionBtn button button-assertive" style="">Get nutrition facts!</button>
+                </form>

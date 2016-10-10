@@ -43,17 +43,23 @@
         <ion-content padding="true">
             <h1>SnapFit</h1>
             <h3>Food nutrients at your fingertips</h3>
-            <div class="dropzone">**************</div>
-            <img id="url" height="250" width="300" ng-src="{{user.image}} || http://flapjacks.com/wp-content/uploads/2014/07/pancakes_tallStack.png">
+            <div class="dropzone"></div>
+            <img ng-show="myimage" id="url" height="250" width="300" ng-src="{{urlForImage(image)}}">
             <br>
-            <button class = "button button-balanced" ng-click = "takePicture()">Take Picture</button>
-            <button class = "button button-energized" ng-click = "getPicture()">Open Gallery</button>
-            <button class="button button-full button-positive" ng-click="getAccess()">Get Food Facts</button>
+            <p>{{imageData}}</p>
+            <button class="imgzone button button-balanced" ng-click="addImage(); myimage=true">Take Picture</button>
+            <button class="button button-energized" ng-click="getPicture()">Open Gallery</button>
+            <button class="button button-block button-positive" ng-click="getAccess(); showme=true">Get Ingredients</button>
             <section class="list">
-                <div class="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
-                        {{ingredient}}
+                <form>
+                    <div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="{{ingredient}}" ng-model="formData.ingredient" ng-value="{{ingredient}}">{{ingredient}}
+                        </label>
                     </div>
-                </section>
+                    <button ng-show="showme" type="submit" class="nutritionBtn button button-assertive">Get nutrition facts!</button>
+                </form>
+            </section>
             <h2>Search by keyword</h2>
             <input type="search" placeholder="Search text" ng-model="data.searchKey">
             <button class="button button-full button-calm" ng-click="doSearch()">Search</button>

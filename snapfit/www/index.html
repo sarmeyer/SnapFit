@@ -43,13 +43,15 @@
         <ion-content padding="true">
             <h1>SnapFit</h1>
             <h3>Food nutrients at your fingertips</h3>
-            <div class="dropzone"></div>
-            <img ng-show="myimage" id="url" height="250" width="300" ng-src="{{urlForImage(image)}}">
+            <!-- <div class="dropzone"></div> -->
+            <img id="url" ng-show="myimage" ng-src="{{imgURI}}" style="text-align: center">
+            <!-- <img id="url" style="height:200px; padding: 5px 5px 5px 5px; width=300px;"> -->
             <br>
-            <p>{{imageData}}</p>
-            <button class="imgzone button button-balanced" ng-click="addImage(); myimage=true">Take Picture</button>
-            <button class="button button-energized" ng-click="getPicture()">Open Gallery</button>
-            <button class="button button-block button-positive" ng-click="getAccess(); showme=true">Get Ingredients</button>
+            <p>{{imgURI}}</p>
+            <button class="button button-energized" ng-click="addMedia(); myimage=true">
+              Add image
+            </button>
+            <button ng-show="myimage" class="button button-block button-positive" ng-click="getAccess()">Get Ingredients</button>
             <section class="list">
                 <form>
                     <div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">

@@ -1,4 +1,4 @@
-var app = angular.module('fileUpload', ['ionic', 'ngCordova', 'ngResource', 'ngFileUpload'])
+var app = angular.module('fileUpload', ['ionic', 'ngCordova', 'ngResource', 'ngFileUpload', 'ngMaterial'])
     .value('nutritionix', {
         'appId': '67ca9680',
         'appKey': 'f2c1ffde813cfe43dad5a60f4f6faa15'
@@ -12,6 +12,5 @@ var app = angular.module('fileUpload', ['ionic', 'ngCordova', 'ngResource', 'ngF
         if(window.StatusBar) {
             StatusBar.styleDefault();
         }
-        // fb = new Firebase("https://example.firebaseio.com/");
     });
 });

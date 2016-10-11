@@ -60,11 +60,21 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
       });
     });
   };
-
   $scope.data = {
-    searchKey: ''
+    searchKey: '',
+    ingredient: ''
+    };
+  $scope.selectItem = function() {
+    if (true) {
+      var promise = DataService.getAll({
+        'term': $scope.data.group1,
+        'results': '0:50',
+      }).$promise;
+      promise.then(function(_response) {
+        $scope.items = _response.hits;
+      });
+    }
   };
-
   $scope.doSearch = function() {
     if (true) {
       var promise = DataService.getAll({
@@ -77,6 +87,5 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
     }
   };
 
-  // $scope.formData = {};
 
 });

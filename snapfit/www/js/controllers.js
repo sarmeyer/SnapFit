@@ -15,6 +15,7 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
       }
     });
   }
+
   $scope.takePhoto = function(type) {
     var source;
     switch (type) {
@@ -36,10 +37,11 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
       popoverOptions: CameraPopoverOptions,
       saveToPhotoAlbum: false
     };
-    $cordovaCamera.getPicture(options).then(function(imageData) {
-        $scope.imgURI = imageData;
-    }, function(err) {});
-  }
+    $cordovaCamera.getPicture(options).then(function(sourcePath) {
+        $scope.imgURI = sourcePath;
+        $scope.foodAPI(sourcePath);
+  })
+}
 
   $scope.foodAPI = function(foodImages) {
     var tokenData = APIservice.getToken();
@@ -47,7 +49,7 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
       var token = response.data.access_token;
       var imgData = APIservice.getTags({
         'token': token,
-        'imageUrl': encodeURI(foodImages)
+        'imageUrl': foodImages
       });
       imgData.then(function(data) {
         $scope.ingredients = data.data.results[0].result.tag.classes;

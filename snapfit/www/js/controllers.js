@@ -42,23 +42,6 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
         $scope.foodAPI(sourcePath);
   })
 }
-
-  $scope.foodAPI = function(foodImages) {
-    var tokenData = APIservice.getToken();
-    tokenData.then(function(response) {
-      var token = response.data.access_token;
-      var imgData = APIservice.getTags({
-        'token': token,
-        'imageUrl': foodImages
-      });
-      imgData.then(function(data) {
-        $scope.ingredients = data.data.results[0].result.tag.classes;
-        $scope.data.searchKey = $scope.ingredients[0];
-        $scope.doSearch();
-      });
-    });
-  };
-
   $scope.getAccess = function() {
     var image = angular.element('#url').attr('src');
     var imageURI = encodeURI(image);
@@ -94,5 +77,6 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
     }
   };
 
-  $scope.formData = {};
+  // $scope.formData = {};
+
 });

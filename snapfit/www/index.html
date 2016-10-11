@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head ng-cloak="">
-<meta charset="utf-8">
+  <head ng-cloak="">
+    <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
@@ -37,51 +37,52 @@
     <script src="js/services.js"></script>
     <script src="/imgur/src/imgur.js"></script>
 
-</head>
-<body ng-app="fileUpload" ng-controller="imageCtrl" ng-cloak="">
+  </head>
+  <body ng-app="fileUpload" ng-controller="imageCtrl" ng-cloak="">
+
     <ion-pane>
-        <ion-content padding="true">
-            <h1>SnapFit</h1>
-            <h3>Food nutrients at your fingertips</h3>
-            <div class="dropzone">Add Image</div>
-            <!-- <img id="url" ng-show="myimage" ng-src="{{imgURI}}" style="text-align: center"> -->
-            <img id="url" style="height:200px; padding: 5px 5px 5px 5px; width=300px;">
-            <br>
-            <!-- <button class="button button-energized" ng-click="addMedia(); myimage=true">
+      <ion-content class='background' padding="true">
+        <h1>SnapFit</h1>
+        <h3>Food nutrients at your fingertips</h3>
+        <div class="dropzone"></div>
+        <!-- <img id="url" ng-show="myimage" ng-src="{{imgURI}}" style="text-align: center"> -->
+        <img id="url" style="height:200px; padding: 5px 5px 5px 5px; width=300px;">
+        <br>
+        <!-- <button class="button button-energized" ng-click="addMedia(); myimage=true">
               Add image
             </button> -->
-            <button class="button button-block button-positive" ng-click="getAccess()">Get Ingredients</button>
-            <section class="list">
-                <form>
-                    <div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
-                        <label class="checkbox-inline">
-                            <input type="checkbox" name="{{ingredient}}" ng-model="formData.ingredient" ng-value="{{ingredient}}">{{ingredient}}
-                        </label>
-                    </div>
-                    <button ng-show="showme" type="submit" class="nutritionBtn button button-assertive">Get nutrition facts!</button>
-                </form>
-            </section>
-            <h2>Search by keyword</h2>
-            <input type="search" placeholder="Search text" ng-model="data.searchKey">
-            <button class="button button-full button-calm" ng-click="doSearch()">Search</button>
-                <div class="list">
-                    <div class="item my-item item-text-wrap" collection-repeat="item in items | limitTo: 5" collection-item-width="'100%'">
-                        {{item.fields.brand_name}} - {{item.fields.item_name}} - {{item.fields.nf_calories}}cal
-                    </div>
-                </div>
-        </ion-content>
+        <button class="button button-block button-positive" ng-click="getAccess()">Get Ingredients</button>
+        <section class="list">
+          <form>
+            <div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
+              <label class="radio-inline">
+                <input type="radio" ng-model="formData.ingredient" value="{{ingredient}}">{{ingredient}}
+              </label>
+            </div>
+            <button ng-show="showme" type="submit" class="nutritionBtn button button-assertive">Get nutrition facts!</button>
+          </form>
+        </section>
+        <h2>Search by keyword</h2>
+        <input type="search" placeholder="Search text" ng-model="data.searchKey">
+        <button class="button button-full button-calm" ng-click="doSearch()">Search</button>
+        <div class="list">
+          <div class="item my-item item-text-wrap" collection-repeat="item in items | limitTo: 5" collection-item-width="'100%'">
+            {{item.fields.brand_name}}
+            -
+            {{item.fields.item_name}}
+            -
+            {{item.fields.nf_calories}}cal
+          </div>
+        </div>
+      </ion-content>
     </ion-pane>
     <script>
-        var callback = function (res) {
-            if (res.success) {
-                document.getElementById('url').src = res.data.link;
-                console.log(res.data.link);
-            }
-        };
-        new Imgur({
-            clientid: '49cb7cc14a97f30',
-            callback: callback
-        });
+      var callback = function(res) {
+        if (res.success) {
+          document.getElementById('url').src = res.data.link;
+        }
+      };
+      new Imgur({clientid: '49cb7cc14a97f30', callback: callback});
     </script>
-</body>
+  </body>
 </html>

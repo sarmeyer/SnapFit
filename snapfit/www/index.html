@@ -45,54 +45,8 @@
 
   </head>
   <body ng-app="fileUpload" ng-controller="imageCtrl" ng-cloak="">
+
     <ion-nav-view></ion-nav-view>
-
-    <!-- <ion-pane>
-      <ion-content class='background' padding="true">
-        <h1 class='title'>SnapFit</h1>
-        <h3 class='tagline'>Food nutrients at your fingertips</h3>
-        <div class="dropzone"></div>
-        <img id="url" ng-show="myimage" ng-src="{{imgURI}}" style="text-align: center">
-        <img id="url" style="height:200px; padding: 5px 5px 5px 5px; width=300px;">
-        <br>
-        <button class="button button-energized" ng-click="addMedia(); myimage=true">
-              Add image
-            </button>
-        <button class="button button-block getIngredients" ng-click="getAccess(); showme=true">Get Ingredients</button>
-        <section class="list">
-          <form class='radioForm'>
-            <div class="ingredientList" name="ingredientList" ng-repeat="ingredient in ingredients | limitTo: 8">
-              <md-radio-group ng-model="data.group1">
-                <md-radio-button class="md-primary" ng-model="data.ingredient" ng-value='ingredient'>{{ingredient}}</md-radio-group>
-                </md-radio-group>
-              </div>
-              <button ng-show="showme" type="submit" ng-click='selectItem(); showlist=true' class="nutritionBtn button button-assertive">Get nutrition facts!</button>
-            </form>
-          </section>
-          <h2>Search by keyword</h2>
-          <input type="search" placeholder="Search text" ng-model="data.searchKey">
-          <button class="button button-full button-calm" ng-click="doSearch()">Search</button>
-          <div ng-hide='!showlist'>
-
-            <md-list-item class='CalList' ng-repeat="item in items | limitTo: 5">
-             <p>   {{item.fields.brand_name}}
-               -
-               {{item.fields.item_name}}
-               -
-               <b>{{item.fields.nf_calories}}cal</b> </p>
-             <md-checkbox class="md-primary" ng-model="ingredient.save">Save</md-checkbox>
-           </md-list-item>
-          </div>
-        </ion-content>
-      </ion-pane>
-      <script>
-        var callback = function(res) {
-          if (res.success) {
-            document.getElementById('url').src = res.data.link;
-          }
-        };
-        new Imgur({clientid: '49cb7cc14a97f30', callback: callback});
-      </script> -->
 
       <ion-tabs class="tabs-icon-top tabs-dark">
 

@@ -31,8 +31,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/dash',
         views: {
           'tab-dash': {
-            templateUrl: 'templates/tab-dash.html'
-            // controller: 'DashCtrl'
+            templateUrl: 'templates/tab-dash.html',
+            controller: 'imageCtrl'
           }
         }
       })
@@ -40,8 +40,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/saved',
         views: {
           'tab-saved': {
-            templateUrl: 'templates/tab-saved.html'
-            // controller: 'savedCtrl'
+            templateUrl: 'templates/tab-saved.html',
+            controller: 'SaveCtrl'
           }
         }
       })

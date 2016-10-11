@@ -25,14 +25,13 @@
         <input type="search" placeholder="Search text" ng-model="data.searchKey">
         <button class="button button-full button-calm" ng-click="doSearch()">Search</button> -->
         <div ng-hide='!showlist'>
-
-          <md-list-item class='CalList' ng-repeat="item in items | limitTo: 5">
-           <p>   {{item.fields.brand_name}}
+          <md-list-item ng-model='input.saved' class='CalList' ng-repeat="item in items | limitTo: 5">
+           <p>{{item.fields.brand_name}}
              -
              {{item.fields.item_name}}
              -
              <b>{{item.fields.nf_calories}}cal</b> </p>
-           <md-checkbox class="md-primary" ng-model="ingredient.save">Save</md-checkbox>
+           <md-checkbox class="md-primary" ng-model="input.saved"></md-checkbox>
          </md-list-item>
         </div>
       </ion-content>

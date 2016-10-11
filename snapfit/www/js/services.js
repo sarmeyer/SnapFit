@@ -51,3 +51,16 @@ app.factory('DataServiceHTTP', function($http, nutritionix) {
     }
   };
 });
+// app.factory('Saved', function () {
+//
+//     var saved = {};
+//
+//     return {
+//         getSaved: function () {
+//             return saved;
+//         },
+//         setSaved: function (savedFood) {
+//             saved = savedFood;
+//         }
+//     };
+// });

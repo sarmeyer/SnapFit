@@ -1,4 +1,4 @@
-app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, APIservice, DataService) {
+app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, APIservice, DataService, Saved) {
 
   $scope.addMedia = function() {
     $scope.hideSheet = $ionicActionSheet.show({
@@ -38,10 +38,10 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
       saveToPhotoAlbum: false
     };
     $cordovaCamera.getPicture(options).then(function(sourcePath) {
-        $scope.imgURI = sourcePath;
-        $scope.foodAPI(sourcePath);
-  })
-}
+      $scope.imgURI = sourcePath;
+      $scope.foodAPI(sourcePath);
+    })
+  }
   $scope.getAccess = function() {
     var image = angular.element('#url').attr('src');
     var imageURI = encodeURI(image);
@@ -63,7 +63,7 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
   $scope.data = {
     searchKey: '',
     ingredient: ''
-    };
+  };
   $scope.selectItem = function() {
     if (true) {
       var promise = DataService.getAll({
@@ -75,6 +75,7 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
       });
     }
   };
+
   $scope.doSearch = function() {
     if (true) {
       var promise = DataService.getAll({
@@ -86,6 +87,8 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
       });
     }
   };
+});
 
+app.controller('SaveCtrl', function($scope, Saved) {
 
 });

@@ -1,4 +1,4 @@
-app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, APIservice, DataService, Saved) {
+app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, APIservice, DataService) {
 
   $scope.addMedia = function() {
     $scope.hideSheet = $ionicActionSheet.show({
@@ -55,15 +55,15 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
       });
       imgData.then(function(data) {
         $scope.ingredients = data.data.results[0].result.tag.classes;
-        $scope.data.searchKey = $scope.ingredients[0];
         $scope.doSearch();
       });
     });
   };
+
   $scope.data = {
-    searchKey: '',
-    ingredient: ''
+    searchKey: ''
   };
+
   $scope.selectItem = function() {
     if (true) {
       var promise = DataService.getAll({
@@ -89,6 +89,6 @@ app.controller('imageCtrl', function($scope, $ionicActionSheet, $cordovaCamera, 
   };
 });
 
-app.controller('SaveCtrl', function($scope, Saved) {
+app.controller('SaveCtrl', function($scope) {
 
 });

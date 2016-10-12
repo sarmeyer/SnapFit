@@ -2,6 +2,39 @@
   <ion-pane>
     <ion-content class='background' padding="true">
       <h1 class='pg2title'>Saved Foods</h1>
-      <!-- <p>{{input}}</p> -->
+      <md-card ng-hide='tacocard' md-theme="theme.dark()" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Rally's</span>
+            <span class="md-subhead">Tacos</span>
+            <span class="md-subhead">440cal</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-xl card-media">
+              <img class='savedImage' src="http://a-muse-of-food.com/wordpress/wp-content/uploads/2015/05/tacos-2.jpg" alt="Oops! Image not available"/>
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ng-click='tacocard=true'>Remove</md-button>
+        </md-card-actions>
+      </md-card>
+      <md-card ng-hide='pancakecard' md-theme="dark-grey" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Pancake</span>
+            <span class="md-subhead">1 large pancake</span>
+            <span class="md-subhead">189.51cal</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-xl card-media">
+              <img class='savedImage' src="http://mosaicacademy.net/wp-content/uploads/2016/05/pancakes-today-150704_ea118c54b249208a58012c90f9e62823.jpg" alt="Oops! Image not available"/>
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ng-click='pancakecard=true'>Remove</md-button>
+        </md-card-actions>
+      </md-card>
     </ion-pane>
   </ion-view>

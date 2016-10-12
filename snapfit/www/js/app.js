@@ -18,6 +18,11 @@ app.config(function($ionicConfigProvider) {
   $ionicConfigProvider.tabs.position('bottom');
 })
 
+app.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .dark();
+});
+
 app.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
@@ -27,24 +32,24 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "templates/tabs.html"
     })
 
-    .state('tab.dash', {
-        url: '/dash',
-        views: {
-          'tab-dash': {
-            templateUrl: 'templates/tab-dash.html',
-            controller: 'imageCtrl'
-          }
+  .state('tab.dash', {
+      url: '/dash',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/tab-dash.html',
+          controller: 'imageCtrl'
         }
-      })
-      .state('tab.saved', {
-        url: '/saved',
-        views: {
-          'tab-saved': {
-            templateUrl: 'templates/tab-saved.html',
-            controller: 'SaveCtrl'
-          }
+      }
+    })
+    .state('tab.saved', {
+      url: '/saved',
+      views: {
+        'tab-saved': {
+          templateUrl: 'templates/tab-saved.html',
+          controller: 'SaveCtrl'
         }
-      })
+      }
+    })
   $urlRouterProvider.otherwise('/tab/dash');
 
 })
